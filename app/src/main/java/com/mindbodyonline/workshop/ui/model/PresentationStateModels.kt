@@ -1,6 +1,8 @@
 package com.mindbodyonline.workshop.ui.model
 
+import com.mindbodyonline.workshop.data.model.Service
 import com.mindbodyonline.workshop.data.model.ServiceCategory
+import com.mindbodyonline.workshop.data.model.Staff
 
 
 typealias ServiceCategoryState = Pair<ServiceCategory, Boolean>
@@ -15,4 +17,8 @@ sealed class ServiceListViewState(val title: String) {
 
 sealed class ServiceDetailViewState(val title: String) {
     object NotFound : ServiceDetailViewState("Not Found")
+    data class Ready(
+        val service: Service,
+        val staff: List<Staff>
+    ) : ServiceDetailViewState(service.name)
 }
