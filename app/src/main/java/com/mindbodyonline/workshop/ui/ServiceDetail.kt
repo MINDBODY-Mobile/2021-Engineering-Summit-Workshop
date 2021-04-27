@@ -195,8 +195,8 @@ private fun ServiceNotFound() {
 
 @Preview
 @Composable
-fun DetailPreview() {
-    MyTheme {
+fun DetailPreview(darkTheme: Boolean = false) {
+    MyTheme(darkTheme) {
         ServiceDetail(
             ServiceDetailViewState.Ready(
                 SampleData.Services.therapeuticMassage,
