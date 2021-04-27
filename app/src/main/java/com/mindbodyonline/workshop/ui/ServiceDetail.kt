@@ -3,17 +3,9 @@ package com.mindbodyonline.workshop.ui
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
+import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme.colors
-import androidx.compose.material.MaterialTheme.typography
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
-import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,20 +15,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mindbodyonline.workshop.data.SampleData
 import com.mindbodyonline.workshop.data.model.PriceOption
-import com.mindbodyonline.workshop.data.model.Service
-import com.mindbodyonline.workshop.data.model.Staff
-import com.mindbodyonline.workshop.ui.theme.MyTheme
-
-sealed class ServiceDetailViewState(val title: String) {
-    object NotFound : ServiceDetailViewState("Not Found")
-    data class Ready(
-        val service: Service,
-        val staff: List<Staff>
-    ) : ServiceDetailViewState(service.name)
-}
-
 import com.mindbodyonline.workshop.data.model.Staff
 import com.mindbodyonline.workshop.ui.model.ServiceDetailViewState
+import com.mindbodyonline.workshop.ui.model.toAnnotatedStringList
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 
 @Composable
@@ -112,14 +93,26 @@ fun PricingOptionsCard(priceOptions: List<PriceOption>, modifier: Modifier) {
         contentColor = colors.onPrimary,
         elevation = 2.dp
     ) {
-        Text(
-            "Services",
-            style = typography.h6,
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(colors.primary)
-                .padding(8.dp)
-        )
+
+        Column {
+            Text(
+                "Services",
+                style = typography.h6,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(colors.primary)
+                    .padding(8.dp)
+            )
+            Spacer(Modifier.height(8.dp))
+            priceOptions.toAnnotatedStringList().forEach {
+                Text(
+                    text = it,
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+                Spacer(modifier = Modifier.size(4.dp))
+            }
+            Spacer(modifier = Modifier.size(4.dp))
+        }
     }
 }
 
