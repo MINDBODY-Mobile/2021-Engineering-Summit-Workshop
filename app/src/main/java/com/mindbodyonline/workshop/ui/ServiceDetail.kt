@@ -5,15 +5,16 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.mindbodyonline.workshop.ui.model.ServiceDetailViewState
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 
 
 @Composable
-fun ServiceDetail() {
+fun ServiceDetail(viewState: ServiceDetailViewState, navigateUp: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Hello World!") },
+                title = { Text(viewState.title) },
             )
         }
     ) {
@@ -25,6 +26,6 @@ fun ServiceDetail() {
 @Composable
 fun DetailPreview() {
     MyTheme {
-        ServiceDetail()
+        ServiceDetail(ServiceDetailViewState.Placeholder, {})
     }
 }
