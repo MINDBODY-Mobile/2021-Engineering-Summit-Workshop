@@ -1,10 +1,9 @@
 package com.mindbodyonline.workshop.ui
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
@@ -15,6 +14,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -26,6 +28,7 @@ import com.mindbodyonline.workshop.data.model.Staff
 import com.mindbodyonline.workshop.ui.model.ServiceDetailViewState
 import com.mindbodyonline.workshop.ui.model.toAnnotatedStringList
 import com.mindbodyonline.workshop.ui.theme.MyTheme
+import kotlin.math.min
 
 @Composable
 fun ServiceDetail(viewState: ServiceDetailViewState, navigateUp: () -> Unit) {
@@ -55,6 +58,10 @@ fun ServiceReady(viewState: ServiceDetailViewState.Ready) {
         modifier = Modifier
             .height(220.dp)
             .fillMaxWidth()
+            .graphicsLayer {
+                alpha = min(1f, 1 - (scrollState.value / 1000f))
+                translationY = -scrollState.value * 0.3f
+            }
     )
     Column(
         Modifier.verticalScroll(scrollState)
@@ -73,6 +80,7 @@ fun ServiceReady(viewState: ServiceDetailViewState.Ready) {
                 .padding(horizontal = 8.dp)
                 .fillMaxWidth()
         )
+        Spacer(Modifier.size(16.dp))
     }
 }
 
@@ -82,7 +90,14 @@ fun StaffListCard(staff: List<Staff>, modifier: Modifier) {
         modifier = modifier,
         backgroundColor = colors.surface,
         contentColor = colors.onSecondary,
-        elevation = 2.dp
+        elevation = 2.dp,
+        border = BorderStroke(
+            width = 2.dp,
+            brush = Brush.verticalGradient(
+                0f to colors.secondary,
+                1f to colors.secondaryVariant.copy(alpha = .5f)
+            )
+        )
     ) {
 
         Column {
@@ -103,7 +118,8 @@ fun StaffListCard(staff: List<Staff>, modifier: Modifier) {
                 Card(
                     modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                     backgroundColor = backgroundColor,
-                    contentColor = colors.onSecondary
+                    contentColor = colors.onSecondary,
+                    shape = RoundedCornerShape(percent = 50)
                 ) {
                     Row(
                         Modifier.padding(2.dp),
@@ -113,7 +129,10 @@ fun StaffListCard(staff: List<Staff>, modifier: Modifier) {
                             painter = painterResource(id = staffMember.avatarResourceId),
                             contentDescription = null,
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.size(72.dp)
+                            modifier = Modifier
+                                .size(72.dp)
+                                .clip(CircleShape)
+
                         )
 
                         Text(
