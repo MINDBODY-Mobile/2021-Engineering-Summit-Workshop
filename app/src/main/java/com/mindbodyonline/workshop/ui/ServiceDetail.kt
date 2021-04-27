@@ -7,9 +7,10 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme.colors
+import androidx.compose.material.MaterialTheme.typography
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
@@ -22,6 +23,18 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.mindbodyonline.workshop.data.SampleData
 import com.mindbodyonline.workshop.data.model.PriceOption
+import com.mindbodyonline.workshop.data.model.Service
+import com.mindbodyonline.workshop.data.model.Staff
+import com.mindbodyonline.workshop.ui.theme.MyTheme
+
+sealed class ServiceDetailViewState(val title: String) {
+    object NotFound : ServiceDetailViewState("Not Found")
+    data class Ready(
+        val service: Service,
+        val staff: List<Staff>
+    ) : ServiceDetailViewState(service.name)
+}
+
 import com.mindbodyonline.workshop.data.model.Staff
 import com.mindbodyonline.workshop.ui.model.ServiceDetailViewState
 import com.mindbodyonline.workshop.ui.theme.MyTheme
