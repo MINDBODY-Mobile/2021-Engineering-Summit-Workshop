@@ -14,5 +14,5 @@ sealed class ServiceListViewState(val title: String) {
 
 
 sealed class ServiceDetailViewState(val title: String) {
-    object Placeholder : ServiceDetailViewState("Hello World")
+    object NotFound : ServiceDetailViewState("Not Found")
 }
