@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.mindbodyonline.workshop.data.Repository
+import com.mindbodyonline.workshop.ui.DetailPreview
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -47,15 +48,11 @@ fun MyApp() {
 @Preview("Light Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun LightPreview() {
-    MyTheme {
-        MyApp()
-    }
+    DetailPreview()
 }
 
 @Preview("Dark Theme", widthDp = 360, heightDp = 640)
 @Composable
 fun DarkPreview() {
-    MyTheme(darkTheme = true) {
-        MyApp()
-    }
+    DetailPreview(darkTheme = true)
 }
