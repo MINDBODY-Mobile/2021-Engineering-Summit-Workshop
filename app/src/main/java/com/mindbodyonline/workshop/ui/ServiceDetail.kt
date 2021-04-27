@@ -24,8 +24,8 @@ fun ServiceDetail(viewState: ServiceDetailViewState, navigateUp: () -> Unit) {
 
 @Preview
 @Composable
-fun DetailPreview() {
-    MyTheme {
+fun DetailPreview(darkTheme: Boolean = false) {
+    MyTheme(darkTheme) {
         ServiceDetail(ServiceDetailViewState.Placeholder, {})
     }
 }
