@@ -17,6 +17,7 @@ import com.mindbodyonline.workshop.data.SampleData
 import com.mindbodyonline.workshop.data.model.PriceOption
 import com.mindbodyonline.workshop.data.model.Service
 import com.mindbodyonline.workshop.data.model.Staff
+import com.mindbodyonline.workshop.ui.model.toAnnotatedStringList
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 
 @Composable
