@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.mindbodyonline.workshop.data.Repository
+import com.mindbodyonline.workshop.data.SampleData
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 
 class MainActivity : AppCompatActivity() {
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
     MyNavHost(
         repository = remember { Repository() },
-        initialRoute = ScreenRoute.ServiceDetailBaseRoute
+        initialRoute = ScreenRoute.serviceDetail(SampleData.Services.therapeuticMassage.id)
     )
 }
 
