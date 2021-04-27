@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
 fun MyApp() {
     MyNavHost(
         repository = remember { Repository() },
-        initialRoute = ScreenRoute.serviceDetail(SampleData.Services.therapeuticMassage.id)
+        initialRoute = ScreenRoute.ServicesListRoute
     )
 }
 

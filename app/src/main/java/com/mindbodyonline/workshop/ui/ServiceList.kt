@@ -2,6 +2,7 @@ package com.mindbodyonline.workshop.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
@@ -77,7 +78,11 @@ fun ServiceList(
 @Composable
 fun ServiceItemCard(service: Service, navigateToDetail: (ServiceId) -> Unit) {
     Card(
-        Modifier.padding(4.dp),
+        Modifier
+            .padding(4.dp)
+            .clickable {
+                navigateToDetail(service.id)
+            },
         elevation = 2.dp,
         backgroundColor = colors.primaryVariant,
         contentColor = colors.onPrimary,
