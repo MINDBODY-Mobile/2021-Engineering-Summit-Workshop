@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.selection.toggleable
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
@@ -25,10 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.mindbodyonline.workshop.data.SampleData
 import com.mindbodyonline.workshop.data.model.Service
 import com.mindbodyonline.workshop.data.model.ServiceId
-import com.mindbodyonline.workshop.ui.model.ServiceCategoryState
-import com.mindbodyonline.workshop.ui.model.ServiceListViewState
-import com.mindbodyonline.workshop.ui.model.durationRange
-import com.mindbodyonline.workshop.ui.model.priceRange
+import com.mindbodyonline.workshop.ui.model.*
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 import com.mindbodyonline.workshop.ui.theme.typography
 import kotlinx.coroutines.launch
@@ -42,7 +40,7 @@ fun ServiceList(
 ) {
     val bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     BottomSheetScaffold(
-        sheetContent = { Text("Hello Bottom Sheet") },
+        sheetContent = { CategoriesBottomSheet(viewState, onCategorySelectionChanged) },
         topBar = {
             TopAppBar(
                 title = { Text(viewState.title) },
@@ -80,6 +78,40 @@ fun ServiceList(
             items(services) { service ->
                 ServiceItemCard(service, navigateToDetail)
             }
+
+        }
+    }
+}
+
+@Composable
+fun CategoriesBottomSheet(
+    viewState: ServiceListViewState,
+    onCategorySelectionChanged: (ServiceCategoryState) -> Unit
+) {
+    val categories = when (viewState) {
+        ServiceListViewState.Placeholder -> emptyList()
+        is ServiceListViewState.Ready -> viewState.categories
+    }
+    categories.forEach {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 4.dp)
+                .toggleable(it.selected) { checked ->
+                    onCategorySelectionChanged(it.category to checked)
+                },
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Checkbox(
+                checked = it.selected,
+                modifier = Modifier.size(48.dp).padding(16.dp),
+                onCheckedChange = null
+            )
+            Text(
+                text = it.category.name,
+                Modifier.padding(8.dp),
+                color = colors.onSurface
+            )
 
         }
     }
