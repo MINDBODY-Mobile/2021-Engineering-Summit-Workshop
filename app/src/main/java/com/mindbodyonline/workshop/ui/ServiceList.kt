@@ -11,8 +11,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterList
 import androidx.compose.material.icons.filled.Spa
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -29,6 +31,7 @@ import com.mindbodyonline.workshop.ui.model.durationRange
 import com.mindbodyonline.workshop.ui.model.priceRange
 import com.mindbodyonline.workshop.ui.theme.MyTheme
 import com.mindbodyonline.workshop.ui.theme.typography
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -37,6 +40,7 @@ fun ServiceList(
     onCategorySelectionChanged: (ServiceCategoryState) -> Unit,
     navigateToDetail: (ServiceId) -> Unit
 ) {
+    val bottomSheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
     BottomSheetScaffold(
         sheetContent = { Text("Hello Bottom Sheet") },
         topBar = {
@@ -46,15 +50,21 @@ fun ServiceList(
                     Icon(
                         Icons.Default.Spa,
                         contentDescription = null,
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
+                        tint = colors.onPrimary
                     )
+                },
+                actions = {
+                    FilterActionIcon(bottomSheetState)
                 }
             )
         },
         sheetBackgroundColor = colors.secondaryVariant,
         sheetPeekHeight = 0.dp,
         sheetElevation = 4.dp,
-        sheetShape = RoundedCornerShape(4.dp, 4.dp, 0.dp, 0.dp)
+        sheetShape = RoundedCornerShape(4.dp, 4.dp, 0.dp, 0.dp),
+        scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = bottomSheetState)
+
     ) {
         val services = when (viewState) {
             ServiceListViewState.Placeholder -> emptyList()
@@ -73,6 +83,23 @@ fun ServiceList(
 
         }
     }
+}
+
+@Composable
+private fun FilterActionIcon(bottomSheetState: BottomSheetState) {
+    val coroutineScope = rememberCoroutineScope()
+    Icon(
+        Icons.Default.FilterList,
+        "Filter",
+        Modifier
+            .size(36.dp)
+            .clickable {
+                coroutineScope.launch {
+                    bottomSheetState.expand()
+                }
+            },
+        tint = colors.onPrimary
+    )
 }
 
 @Composable
