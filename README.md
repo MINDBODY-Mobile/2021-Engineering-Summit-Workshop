@@ -3,6 +3,17 @@ Clone this repository and open it in the latest [Android Studio (Canary build)](
 
 For further instructions on IDE configuration, visit our [workshop wiki page](https://dev.azure.com/mindbody/MBScrum/_wiki/wikis/MBScrum.wiki/5670/IDE-Configuration)
 
+
+### Cloning the Project
+We will start building from a framework application to give us a head start.  When you open Android Studio, tap the _Get from VCS_ button, then copy and paste the following github url into the _URL_ box, and click _clone_.
+
+Git url: `https://github.com/MINDBODY-Mobile/2021-Engineering-Summit-Workshop.git` 
+
+![Screen Shot 2021-04-28 at 9 00 28 AM](https://user-images.githubusercontent.com/561521/116436353-2f7bac80-a801-11eb-863e-8ec084c464a1.png)
+
+![Screen Shot 2021-04-28 at 9 04 34 AM](https://user-images.githubusercontent.com/561521/116436369-32769d00-a801-11eb-9a26-4bb485a68def.png)
+
+
 ## Getting Caught up
 This repository is organized such that each breakpoint in our workshop corresponds with a branch in the repository.  If you find a section particularly challenging, or you want to look ahead to better understand what to expect, just checkout the branch that corresponds with the section you want.
 
@@ -27,7 +38,6 @@ If you need to discard your local changes, and get immediately caught up, you ca
 | Breakpoint 10 | `git reset --hard && git checkout breakpoint-10` | ![list-to-detail](https://user-images.githubusercontent.com/561521/116346184-94ea8180-a79e-11eb-8cdc-6e0e06469f35.gif) |
 | Breakpoint 11 | `git reset --hard && git checkout breakpoint-11` | ![filter-action-icon](https://user-images.githubusercontent.com/561521/116346477-35d93c80-a79f-11eb-875c-c3a67698d198.gif) |
 | Finished Project | `git reset --hard && git checkout finished-project` | ![finished-project](https://user-images.githubusercontent.com/561521/116346789-c9127200-a79f-11eb-9fe7-be5a6400b7c9.gif) |
-
 
 
 
